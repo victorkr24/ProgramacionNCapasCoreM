@@ -1,0 +1,58 @@
+﻿@model ML.Aseguradora
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAll</h1>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Seleccione + para registrar una nueva aseguradora.</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+
+            @Html.ActionLink("+", "Form", "Aseguradora", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+        <br> <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>Editar</td>
+                        <td>Nombre</td>
+                        <td>Fecha Creación</td>
+                        <td>Fecha de Modificación</td>
+                        <td>Id</td>
+                        <td>IdUsuario</td>
+                        <td>NombreID</td>
+                        <td>Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Aseguradora aseguradora in Model.Aseguradoras)
+                    {
+                        <tr>
+                            <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Aseguradora", new { IdAseguradora = aseguradora.IdAseguradora })"></a></td>
+                            <td>@aseguradora.Nombre</td>
+                            <td>@aseguradora.FechaCreacion</td>
+                            <td>@aseguradora.FechaModificacion</td>
+                            <td>@aseguradora.IdAseguradora</td>
+                          <td>@aseguradora.Usuario.IdUsuario</td>
+                         @* aseguradora.Usuario.Nombre = obj.UsuarioNombre;*@
+                           <td>@aseguradora.Usuario.UserName</td>
+                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Aseguradora", new { IdAseguradora = aseguradora.IdAseguradora })" onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
